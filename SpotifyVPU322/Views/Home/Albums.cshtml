@@ -1,0 +1,64 @@
+﻿@using SpotifyVPU322.DTO
+@model List<GetAllAlbumDTO>
+
+<div class="container">
+    <h1>Мои Альбомы</h1>
+    <div class="album">
+        @foreach (var item in Model) {
+            <a asp-controller="Album" asp-action="Details" asp-route-id = "@item.Id">
+                <img src="https://avatars.yandex.net/get-music-content/5587254/4c9bd4b8.a.20509390-1/m1000x1000?webp=false" alt=$"{@item.PhotoUrl}">
+                <h2>@item.Title</h2>
+            </a>
+        }
+    </div>
+</div>
+
+
+
+
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        text-align: center;
+        color: #333;
+    }
+
+    .album {
+        background: #eaeaea;
+        border-radius: 8px;
+        margin: 15px 0;
+        padding: 15px;
+        transition: transform 0.2s;
+    }
+
+        .album:hover {
+            transform: scale(1.02);
+        }
+
+        .album img {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+
+        .album h2 {
+            color: #444;
+            margin: 10px 0;
+        }
+
+</style>
