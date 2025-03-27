@@ -1,13 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SpotifyVPU322.Repositories;
+using SpotifyVPU322.Repositories.Interfaces;
 
 namespace SpotifyVPU322.Controllers
 {
-    public class AlbumController : Controller
+    public class AlbumController(IAlbumRepository albumRepository) : Controller
     {
-        public IActionResult Details(int id)
+        public async Task<IActionResult> Details(int id)
         {
-
-            return View();
+            var album = await albumRepository.GetDetailsAsync(id);
+            return View(album);
         }
     }
 }

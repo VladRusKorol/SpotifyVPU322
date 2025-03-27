@@ -1,11 +1,12 @@
 ﻿@using SpotifyVPU322.DTO
-@model List<GetAllAlbumDTO>
+@using SpotifyVPU322.Models
+@model List<Album>
 
 <div class="container">
     <h1>Мои Альбомы</h1>
     <div class="album">
         @foreach (var item in Model) {
-            <a asp-controller="Album" asp-action="Details" asp-route-id = "@item.Id">
+            <a asp-controller="Album" asp-action="Details" asp-route-id="@item.Id">
                 <img src="https://avatars.yandex.net/get-music-content/5587254/4c9bd4b8.a.20509390-1/m1000x1000?webp=false" alt=$"{@item.PhotoUrl}">
                 <h2>@item.Title</h2>
             </a>

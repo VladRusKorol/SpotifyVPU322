@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using SpotifyVPU322.DataBase;
 using SpotifyVPU322.DTO;
 using SpotifyVPU322.Models;
@@ -18,17 +19,20 @@ public class AlbumRepository(ApplicationDBContext context) : IAlbumRepository
                         PhotoUrl = album.PhotoUrl
                     }).ToListAsync();
     }
-    //public async Task<Album> GetDetailsAsync(int id)
-    //{
-    //    //return await context
-    //    //            .Albums
-    //    //            .Include(x => x.)
-    //    //            .Select(album => new GetAllAlbumDTO()
-    //    //            {
-    //    //                Id = album.Id,
-    //    //                Title = album.Title,
-    //    //                PhotoUrl = album.PhotoUrl
-    //    //            }).SingleAsync(x => x.Id == id)
-                  
-    //}
+
+    public async Task<List<Album>> GetFullAlbums()
+    {
+        return await context.Albums.ToListAsync();
+
+    }
+    public async Task<Album> GetDetailsAsync(int id)
+    {
+        return await context.Albums
+                    .Include(x => x.AlbumSongs)
+                    .Include(x => x.Artist)
+                    .Where(x => x.Id == id)
+                    .DefaultIfEmpty()
+                    .SingleAsync();
+
+    }
 }
